@@ -1,6 +1,6 @@
 'use strict';
 
-var parser = HTMLParser;
+var parser = typeof window === 'undefined' ? global.HTMLParser : window.HTMLParser;
 
 class HTML2IncDom {
 	/**
@@ -41,6 +41,19 @@ class HTML2IncDom {
 				IncrementalDOM.text(text);
 			}
 		});
+	}
+
+	/**
+	 * Changes the function that will be used to parse html strings. By default
+	 * this will use the `HTMLParser` function from
+	 * https://github.com/blowsie/Pure-JavaScript-HTML5-Parser. This will accept
+	 * any function that follows that same api, basically accepting the html
+	 * string and an object with `start`, `end` and `chars` functions to be called
+	 * during the parsing.
+	 * @param {!function(string, !Object} newParser 
+	 */
+	static setParser(newParser) {
+		parser = newParser;
 	}
 }
 

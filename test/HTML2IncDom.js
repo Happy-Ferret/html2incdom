@@ -26,4 +26,17 @@ describe('HTML2IncDom', function() {
 		IncrementalDOM.patch(element, fn);
 		assert.strictEqual(htmlStr, element.innerHTML);
 	});
+
+	it('should allow parser to be replaced by another with equivalent api', function() {
+		HTML2IncDom.setParser(function(html, handlers) {
+			handlers.start('div', [{name: 'class', value: 'inner'}]);
+			handlers.chars('Foo-CustomParser');
+			handlers.end('div');
+		});
+
+		var element = document.createElement('div');
+		var htmlStr = '<div class="inner">Foo</div>';
+		IncrementalDOM.patch(element, () => HTML2IncDom.run(htmlStr));
+		assert.strictEqual('<div class="inner">Foo-CustomParser</div>', element.innerHTML);
+	});
 });
