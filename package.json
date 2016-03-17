@@ -1,0 +1,39 @@
+{
+  "name": "html2incdom",
+  "version": "0.0.0",
+  "description": "Converts html strings into incremental dom calls",
+  "license": "MIT",
+  "repository": "mairatma/html2incdom",
+  "author": {
+    "name": "Maira Bello",
+    "email": "maira.araujo@liferay.com"
+  },
+  "engines": {
+    "node": ">=0.12.0"
+  },
+  "main": "lib/withParser.js",
+  "browser": "src/withParser.js",
+  "files": [
+    "src",
+    "lib"
+  ],
+  "scripts": {
+    "compile": "babel --presets es2015 -d lib/ src/",
+    "coverage": "istanbul cover _mocha",
+    "prepublish": "npm run compile",
+    "lint": "jshint src/*.js",
+    "test": "mocha"
+  },
+  "keywords": [
+    "html",
+    "incrementaldom",
+    "incremental-dom"
+  ],
+  "devDependencies": {
+    "babel-cli": "^6.4.5",
+    "babel-preset-es2015": "^6.3.13",
+    "istanbul": "^0.4.2",
+    "jshint": "^2.7.0",
+    "mocha": "^2.2.5"
+  }
+}
