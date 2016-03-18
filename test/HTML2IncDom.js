@@ -1,6 +1,6 @@
 'use strict';
 
-import HTML2IncDom from '../src/HTML2IncDom';
+import HTML2IncDom from '../src/withParser';
 
 describe('HTML2IncDom', function() {
 	it('should render html inside element via incremental dom', function() {

@@ -14,12 +14,13 @@ module.exports = function (config) {
     files: [
       'node_modules/incremental-dom/dist/incremental-dom.js',
 			'HTMLParser.js',
-      'src/HTML2IncDom.js',
+      'src/*.js',
       'test/*.js'
     ],
 
     preprocessors: {
-			'src/*.js': ['coverage', 'commonjs'],
+      'HTMLParser.js': ['commonjs'],
+      'src/*.js': ['coverage', 'commonjs'],
       'test/*.js': ['babel', 'commonjs']
     },
 
