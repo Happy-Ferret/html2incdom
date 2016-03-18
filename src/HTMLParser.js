@@ -110,7 +110,7 @@
 	// Special Elements (can contain anything)
 	var special = makeMap("script,style");
 
-	var HTMLParser = this.HTMLParser = function (html, handler) {
+	var HTMLParser = window.HTMLParser = function (html, handler) {
 		var index, chars, match, stack = [], last = html;
 		stack.last = function () {
 			return this[this.length - 1];
