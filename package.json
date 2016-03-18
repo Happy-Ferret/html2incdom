@@ -11,16 +11,12 @@
   "engines": {
     "node": ">=0.12.0"
   },
-  "main": "lib/withParser.js",
-  "browser": "src/withParser.js",
+  "main": "src/withParser.js",
   "files": [
     "HTMLParser.js",
-    "src",
-    "lib"
+    "src"
   ],
   "scripts": {
-    "compile": "babel --presets es2015 -d lib/ src/",
-    "prepublish": "npm run compile",
     "lint": "jshint src/*.js",
     "test": "karma start --single-run"
   },
@@ -30,8 +26,6 @@
     "incremental-dom"
   ],
   "devDependencies": {
-    "babel-cli": "^6.4.5",
-    "babel-preset-es2015": "^6.3.13",
     "chai": "^3.5.0",
     "incremental-dom": "^0.3.0",
     "isparta": "^4.0.0",
