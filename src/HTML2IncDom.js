@@ -1,6 +1,6 @@
 'use strict';
 
-var parser = typeof window === 'undefined' ? global.HTMLParser : window.HTMLParser;
+var parser_;
 
 class HTML2IncDom {
 	/**
@@ -15,11 +15,19 @@ class HTML2IncDom {
 	}
 
 	/**
+	 * Gets the html parser being currently used.
+	 * @return {!function()}
+	 */
+	static getParser() {
+		return parser_ || window.HTMLParser;
+	}
+
+	/**
 	 * Should convert the given html string to calls to incremental dom methods.
 	 * @param {string} html
 	 */
 	static run(html) {
-		parser(html, {
+		HTML2IncDom.getParser()(html, {
 			start: function(tag, attrs, unary) {
 				var fn = unary ? IncrementalDOM.elementVoid : IncrementalDOM.elementOpen;
 				var args = [
@@ -50,10 +58,10 @@ class HTML2IncDom {
 	 * any function that follows that same api, basically accepting the html
 	 * string and an object with `start`, `end` and `chars` functions to be called
 	 * during the parsing.
-	 * @param {!function(string, !Object} newParser 
+	 * @param {!function(string, !Object} newParser
 	 */
 	static setParser(newParser) {
-		parser = newParser;
+		parser_ = newParser;
 	}
 }
 
