@@ -1,5 +1,7 @@
 'use strict';
 
+import unescape from './unescape';
+
 var parser_;
 
 class HTML2IncDom {
@@ -46,7 +48,7 @@ class HTML2IncDom {
 			},
 
 			chars: function(text) {
-				IncrementalDOM.text(text);
+				IncrementalDOM.text(text, unescape);
 			}
 		});
 	}

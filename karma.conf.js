@@ -19,7 +19,8 @@ module.exports = function (config) {
 
     preprocessors: {
       'src/HTMLParser.js': ['commonjs'],
-      'src/!(HTMLParser).js': ['coverage', 'commonjs'],
+      'src/unescape.js': ['commonjs'],
+      'src/!(HTMLParser|unescape).js': ['coverage', 'commonjs'],
       'test/*.js': ['babel', 'commonjs']
     },
 

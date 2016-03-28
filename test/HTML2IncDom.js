@@ -10,6 +10,12 @@ describe('HTML2IncDom', function() {
 		assert.strictEqual(htmlStr, element.innerHTML);
 	});
 
+	it('should render escaped html inside element via incremental dom', function() {
+		var element = document.createElement('div');
+		IncrementalDOM.patch(element, () => HTML2IncDom.run('&#39;Foo&#39;'));
+		assert.strictEqual('\'Foo\'', element.textContent);
+	});
+
 	it('should render void elements from html via incremental dom', function() {
 		var element = document.createElement('div');
 		var htmlStr = '<input type="text">';
