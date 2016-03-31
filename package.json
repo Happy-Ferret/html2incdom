@@ -1,6 +1,6 @@
 {
   "name": "html2incdom",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Converts html strings into incremental dom calls",
   "license": "MIT",
   "repository": "mairatma/html2incdom",
