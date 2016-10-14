@@ -10,6 +10,13 @@ describe('HTML2IncDom', function() {
 		assert.strictEqual(htmlStr, element.innerHTML);
 	});
 
+	it('should render link element inside its span parent via incremental dom', function() {
+		var element = document.createElement('div');
+		var htmlStr = '<span><a>Foo</a></span>';
+		IncrementalDOM.patch(element, () => HTML2IncDom.run(htmlStr));
+		assert.strictEqual(htmlStr, element.innerHTML);
+	});
+
 	it('should render escaped html inside element via incremental dom', function() {
 		var element = document.createElement('div');
 		IncrementalDOM.patch(element, () => HTML2IncDom.run('&#39;Foo&#39;'));
@@ -33,16 +40,22 @@ describe('HTML2IncDom', function() {
 		assert.strictEqual(htmlStr, element.innerHTML);
 	});
 
-	it('should allow parser to be replaced by another with equivalent api', function() {
-		HTML2IncDom.setParser(function(html, handlers) {
-			handlers.start('div', [{name: 'class', value: 'inner'}]);
-			handlers.chars('Foo-CustomParser');
-			handlers.end('div');
+	describe('setParser', function() {
+		afterEach(function() {
+			HTML2IncDom.setParser(null);
 		});
 
-		var element = document.createElement('div');
-		var htmlStr = '<div class="inner">Foo</div>';
-		IncrementalDOM.patch(element, () => HTML2IncDom.run(htmlStr));
-		assert.strictEqual('<div class="inner">Foo-CustomParser</div>', element.innerHTML);
+		it('should allow parser to be replaced by another with equivalent api', function() {
+			HTML2IncDom.setParser(function(html, handlers) {
+				handlers.start('div', [{name: 'class', value: 'inner'}]);
+				handlers.chars('Foo-CustomParser');
+				handlers.end('div');
+			});
+
+			var element = document.createElement('div');
+			var htmlStr = '<div class="inner">Foo</div>';
+			IncrementalDOM.patch(element, () => HTML2IncDom.run(htmlStr));
+			assert.strictEqual('<div class="inner">Foo-CustomParser</div>', element.innerHTML);
+		});
 	});
 });
